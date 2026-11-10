@@ -1,0 +1,56 @@
+{
+  "Navbar": {
+    "Data Fetching":"جلب البيانات",
+    "Build Your Application":"بناء تطبيقك",
+    "Home":"الصفحة الرئيسية",
+    "Platform Management":"إدارة المنصة",
+    "establishments":"المؤسسات",
+    "orders":"الطلبات",
+    "Catalog":"الكتالوج",
+    "products":"المنتجات",
+    "categories":"الفئات",
+    "manufacturers":"التصنيع",
+    "Communication":"التواصل",
+    "slider":"الشريط المتحرك",
+    "notifications":"الإشعارات",
+    "governorates":"المقاطعات",
+    "team":"الفريق",
+    "staff":"الطاقم",
+    "roles":"الأدوار"
+  },
+    "Home":{
+    "hello":"مرحباً"
+  },
+  "Common": {
+    "welcome": "مرحباً",
+    "logout": "تسجيل الخروج",
+    "language": "اللغة"
+  },
+  "sidebar":{
+    "Home":"الصفحة الرئيسية",
+    "Platform Management":"إدارة المنصة",
+    "establishments":"المؤسسات",
+    "orders":"الطلبات",
+    "Catalog":"الكتالوج",
+    "products":"المنتجات",
+    "categories":"الفئات",
+    "manufacturers":"التصنيع",
+    "Communication":"التواصل",
+    "slider":"الشريط المتحرك",
+    "notifications":"الإشعارات",
+    "governorates":"المقاطعات",
+    "team":"الفريق",
+    "staff":"الطاقم",
+    "roles":"الأدوار"
+  },
+  "Login":{
+    "Sign in to your account to continue":"سجّل الدخول إلى حسابك للمتابعة",
+    "Email":"البريد الالكتروني",
+    "Enter your email":"ادخل بريدك الالكتروني",
+    "Password":"كلمة المرور",
+    "Enter your password":"ادخل كلمة المرور",
+    "Login":"تسجيل الدخول",
+    "The selected email is invalid.":"عنوان البريد الإلكتروني المختار غير صالح.",
+    "Logging in...":"يتم تسجيل الدخول..."
+  }
+}
