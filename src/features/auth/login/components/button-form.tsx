@@ -2,7 +2,6 @@
 import { Button } from "@/components/ui/button";
 import { LogIn } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { toast } from "@/components/ui/toast"
 type ButtonFormProps = {
   isPending: boolean;
 };
@@ -16,7 +15,7 @@ export default function ButtonForm({ isPending }: ButtonFormProps) {
       className="h-10 pl-8 w-full bg-blue-600 text-base hover:bg-blue-700 dark:text-white"
     >
       <LogIn size={20} />
-      {isPending ? t("Logging in...") : t("Login")}
+      {isPending ? t("Logging in") : t("Login")}
     </Button>
   );
 }

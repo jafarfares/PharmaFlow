@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/toast";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { Suspense } from "react";
 import {
   getMessages,
   setRequestLocale,

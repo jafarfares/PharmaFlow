@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
+import {QueryProvider} from "@/providers/query-provider"
 import localFont from "next/font/local";
 
 const ibmPlex = localFont({
@@ -49,7 +49,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${ibmPlex.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body>{children}</body>
+      <QueryProvider><body>{children}</body></QueryProvider>
+      
     </html>
   );
 }

@@ -50,7 +50,7 @@
     "Password":"كلمة المرور",
     "Enter your password":"ادخل كلمة المرور",
     "Login":"تسجيل الدخول",
-    "The selected email is invalid.":"عنوان البريد الإلكتروني المختار غير صالح.",
-    "Logging in...":"يتم تسجيل الدخول..."
+    "The selected email is invalid":"عنوان البريد الإلكتروني المختار غير صالح",
+    "Logging in":"يتم تسجيل الدخول"
   }
 }

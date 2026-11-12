@@ -40,7 +40,7 @@ export default function EmailForm({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={t("Enter your email")}
-          className="h-10 pl-8 text-base text-slate-900"
+          className="h-10 pl-8 text-base text-slate-900 dark:text-white"
           aria-invalid={Boolean(error)}
         />
       </div>

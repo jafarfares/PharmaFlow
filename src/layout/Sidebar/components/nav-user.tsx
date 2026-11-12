@@ -1,113 +1,164 @@
+
+// "use client";
+// import { useState } from "react";
+// import { LogOut } from "lucide-react";
+// import {useProfile} from "@/features/auth/profile/hook/useProfile"
+// import {
+//   Avatar,
+//   AvatarFallback,
+// } from "@/components/ui/avatar";
+
+// import {
+//   SidebarMenu,
+//   SidebarMenuButton,
+//   SidebarMenuItem,
+// } from "@/components/ui/sidebar";
+
+// import { useLogout } from "@/features/auth/logout/hook/useLogout";
+
+// export function NavUser() {
+//   const { data} = useProfile();
+//   const { mutate: logout, isPending } = useLogout();
+
+//   // Temporary user data
+//   const user = {
+//     name: "Admin User",
+//     email: "admin@admin.com",
+//   };
+
+//   const initials = user.name
+//     .split(" ")
+//     .map((word) => word[0])
+//     .slice(0, 2)
+//     .join("")
+//     .toUpperCase();
+
+//   return (
+//     <SidebarMenu className="gap-2">
+//       {/* User Information */}
+//       <SidebarMenuItem>
+//         <div className="flex items-center gap-3 px-2 py-2">
+//           <Avatar className="h-10 w-10 rounded-lg">
+//             <AvatarFallback className="rounded-lg">
+//               {initials}
+//             </AvatarFallback>
+//           </Avatar>
+
+//           <div className="grid flex-1 min-w-0 text-left text-sm leading-tight">
+//             <span className="truncate font-semibold">
+//               {data.name}
+//             </span>
+
+//             <span className="truncate text-xs text-muted-foreground">
+//               {data.email}
+//             </span>
+//           </div>
+//         </div>
+//       </SidebarMenuItem>
+
+//       {/* Logout Button */}
+//       <SidebarMenuItem>
+//         <SidebarMenuButton
+//           onClick={() => logout()}
+//           disabled={isPending}
+//           className="text-destructive hover:text-destructive hover:bg-destructive/10 flex justify-center items-center"
+//         >
+//           <LogOut className="size-4" />
+
+//           <span>
+//             {isPending ? "Logging out..." : "Log out"}
+//           </span>
+//         </SidebarMenuButton>
+//       </SidebarMenuItem>
+//     </SidebarMenu>
+//   );
+// }
+
+
+
+
+
+
+
+
+
+
+
+
 "use client";
+import { Suspense } from 'react'
+import { LogOut } from "lucide-react";
+import { useProfile } from "@/features/auth/profile/hook/useProfile";
+import { useLogout } from "@/features/auth/logout/hook/useLogout";
 
 import {
-  BadgeCheck,
-  Bell,
-  ChevronsUpDown,
-  CreditCard,
-  LogOut,
-  Sparkles,
-} from "lucide-react";
+  Avatar,
+  AvatarFallback,
+} from "@/components/ui/avatar";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar,
 } from "@/components/ui/sidebar";
 
-export function NavUser({
-  user,
-}: {
-  user: {
-    name: string;
-    email: string;
-    avatar: string;
-  };
-}) {
-  const { isMobile } = useSidebar();
+export function NavUser() {
+  const {
+    data,
+    isPending,
+    isError,
+  } = useProfile();
+
+  const { mutate: logout, isPending: isLoggingOut } = useLogout();
+
+  if (isPending) {
+    return <div className="px-2 py-3 text-sm">Loading user...</div>;
+  }
+
+  if (isError || !data) {
+    return <div className="px-2 py-3 text-sm">Unable to load user</div>;
+  }
+
+  const initials = data.name
+    .split(" ")
+    .map((word) => word[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
 
   return (
-    <SidebarMenu>
+    <SidebarMenu className="gap-2">
       <SidebarMenuItem>
-        <DropdownMenu>
-          <DropdownMenuTrigger
-            render={
-              <SidebarMenuButton
-                size="lg"
-                
-              />
-            }
-          >
-            <Avatar className="h-8 w-8 rounded-lg">
-              <AvatarImage src={user.avatar} alt={user.name} />
-              <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-            </Avatar>
+        <div className="flex items-center gap-3 px-2 py-2">
+          <Avatar className="h-10 w-10 rounded-lg">
+            <AvatarFallback className="rounded-lg">
+              {initials}
+            </AvatarFallback>
+          </Avatar>
 
-            <div className="grid flex-1 text-left text-sm leading-tight">
-              <span className="truncate font-medium">{user.name}</span>
-              <span className="truncate text-xs">{user.email}</span>
-            </div>
+          <div className="grid flex-1 min-w-0 text-left text-sm leading-tight">
+            <span className="truncate font-semibold">
+              {data.name}
+            </span>
 
-            <ChevronsUpDown className="ml-auto size-4" />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
-            side={isMobile ? "bottom" : "right"}
-            align="end"
-            sideOffset={4}
-          >
-            <DropdownMenuLabel className="p-0 font-normal">
-              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-                </Avatar>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">{user.name}</span>
-                  <span className="truncate text-xs">{user.email}</span>
-                </div>
-              </div>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <Sparkles />
-                Upgrade to Pro
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <BadgeCheck />
-                Account
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCard />
-                Billing
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Bell />
-                Notifications
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <LogOut />
-              Log out
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+            <span className="truncate text-xs text-muted-foreground">
+              {data.email}
+            </span>
+          </div>
+        </div>
+      </SidebarMenuItem>
+
+      <SidebarMenuItem>
+        <SidebarMenuButton
+          onClick={() => logout()}
+          disabled={isLoggingOut}
+          className="text-destructive hover:text-destructive hover:bg-destructive/10 flex justify-center items-center"
+        >
+          <LogOut className="size-4" />
+          <span>
+            {isLoggingOut ? "Logging out..." : "Log out"}
+          </span>
+        </SidebarMenuButton>
       </SidebarMenuItem>
     </SidebarMenu>
   );
