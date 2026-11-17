@@ -9,6 +9,7 @@ import {
 
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import FullPageLoader from "@/components/shared/Loading/FullPageLoader";
 //import { AuthGuard } from "@/components/shared/auth/access-token";
 import AuthGuard from "@/components/shared/auth/access-token"
 export const metadata: Metadata = {
@@ -50,7 +51,11 @@ export default async function LocaleLayout({
         dir={direction}
         className="min-h-screen"
       >
-        <Toaster><AuthGuard>{children}</AuthGuard></Toaster>
+        <Toaster>
+          <Suspense fallback={<FullPageLoader />}>
+            <AuthGuard>{children}</AuthGuard>
+          </Suspense>
+        </Toaster>
         
       </div>
     </NextIntlClientProvider>
